@@ -1,12 +1,30 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useMediaQuery } from "react-responsive";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const MOBILE_BREAKPOINT = 768;
+
+// Custom hook to detect mobile using useSyncExternalStore (hydration-safe)
+function useIsMobile() {
+  const subscribe = (callback: () => void) => {
+    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
+    mediaQuery.addEventListener("change", callback);
+    return () => mediaQuery.removeEventListener("change", callback);
+  };
+
+  const getSnapshot = () => {
+    return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
+  };
+
+  const getServerSnapshot = () => false; // Default to desktop on server
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
 
 // Feature cards data
 const featureCards = [
@@ -51,7 +69,7 @@ const FeatureShowcase = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -109,10 +127,7 @@ const FeatureShowcase = () => {
   }, [isMobile]);
 
   return (
-    <section
-      ref={sectionRef}
-      className={isMobile ? "relative" : "min-h-screen relative"}
-    >
+    <section ref={sectionRef} className="min-h-screen md:min-h-screen relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-12">
@@ -125,12 +140,24 @@ const FeatureShowcase = () => {
           </p>
         </div>
 
-        {/* Stacked Cards Container */}
+        {/* Mobile: Stacked Cards */}
+        <div className="md:hidden flex flex-col gap-6">
+          {featureCards.map((card, index) => (
+            <div key={card.id} className="w-full">
+              <FeatureCard
+                title={card.title}
+                description={card.description}
+                image={card.image}
+                index={index}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: Animated Stacked Cards Container */}
         <div
           ref={cardsContainerRef}
-          className={
-            isMobile ? "flex flex-col gap-6" : "relative h-[500px] md:h-[550px]"
-          }
+          className="hidden md:block relative h-[500px] md:h-[550px]"
         >
           {featureCards.map((card, index) => (
             <div
@@ -138,8 +165,8 @@ const FeatureShowcase = () => {
               ref={(el) => {
                 if (el) cardsRef.current[index] = el;
               }}
-              className={isMobile ? "w-full" : "absolute inset-0 w-full"}
-              style={isMobile ? {} : { zIndex: index + 1 }}
+              className="absolute inset-0 w-full"
+              style={{ zIndex: index + 1 }}
             >
               <FeatureCard
                 title={card.title}
