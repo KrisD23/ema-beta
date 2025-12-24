@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,12 +71,15 @@ const SolutionCards = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const [visibleCards, setVisibleCards] = useState(3);
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     const section = sectionRef.current;
     const cardsContainer = cardsContainerRef.current;
 
-    if (!section || !cardsContainer) return;
+    if (!section || !cardsContainer || isMobile) return;
 
     const totalScrollWidth = cardsContainer.scrollWidth - window.innerWidth;
     const extraPinSpace = window.innerWidth; // Full viewport width of extra scroll
@@ -97,17 +101,24 @@ const SolutionCards = () => {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
+
+  const handleViewMore = () => {
+    setVisibleCards((prev) => prev + 3);
+  };
+
+  const displayedCards = isMobile ? cards.slice(0, visibleCards) : cards;
+  const hasMoreCards = isMobile && visibleCards < cards.length;
 
   return (
     <section ref={sectionRef} className="overflow-hidden bg-[#f5f5f0]">
-      <div ref={triggerRef} className="min-h-screen">
+      <div ref={triggerRef} className={isMobile ? "" : "min-h-screen"}>
         {/* Header */}
         <div className="max-w-7xl mx-auto pt-16 md:pt-24 px-6 md:px-12 mb-12">
-          <p className="text-[#2d5a47] text-sm md:text-base font-medium tracking-wide uppercase mb-4">
+          <p className="text-primary-green text-sm md:text-base font-medium font-satoshi tracking-wide uppercase mb-4">
             Choose Ema&apos;s role to start
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#1a1a1a] leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-satoshi font-medium leading-tight">
             Meet Your On-Demand AI
             <br />
             Employees
@@ -116,11 +127,18 @@ const SolutionCards = () => {
 
         {/* Horizontal Scrolling Cards */}
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div ref={cardsContainerRef} className="flex gap-6 pb-16">
-            {cards.map((card) => (
+          <div
+            ref={cardsContainerRef}
+            className={`${
+              isMobile ? "flex flex-col gap-6 pb-8" : "flex gap-6 pb-16"
+            }`}
+          >
+            {displayedCards.map((card) => (
               <div
                 key={card.id}
-                className="shrink-0 w-75 md:w-85 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+                className={`${
+                  isMobile ? "w-full" : "shrink-0 w-75 md:w-85"
+                } bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100`}
               >
                 {/* Card Image Placeholder */}
                 <div className="relative h-70 md:h-80 bg-gray-50 flex items-center justify-center overflow-hidden">
@@ -154,7 +172,7 @@ const SolutionCards = () => {
 
                 {/* Card Content */}
                 <div className="p-6">
-                  <h3 className="text-lg md:text-xl font-semibold text-[#1a1a1a] mb-3">
+                  <h3 className="text-lg md:text-xl font-semibold font-satoshi mb-3">
                     {card.title}
                   </h3>
                   <p className="text-sm md:text-base text-gray-600 leading-relaxed">
@@ -163,9 +181,21 @@ const SolutionCards = () => {
                 </div>
               </div>
             ))}
-            {/* Extra spacing div at the end */}
-            <div className="shrink-0 w-[50vw]"></div>
+            {/* Extra spacing div at the end - only for desktop */}
+            {!isMobile && <div className="shrink-0 w-[50vw]"></div>}
           </div>
+
+          {/* View More Button - Mobile Only */}
+          {hasMoreCards && (
+            <div className="flex justify-center pb-12">
+              <button
+                onClick={handleViewMore}
+                className="px-8 py-3 bg-primary-green text-white font-satoshi font-medium rounded-full hover:bg-opacity-90 transition-all"
+              >
+                VIEW MORE
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>

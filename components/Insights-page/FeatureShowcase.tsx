@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useMediaQuery } from "react-responsive";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,13 +51,14 @@ const FeatureShowcase = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     const section = sectionRef.current;
     const cardsContainer = cardsContainerRef.current;
     const cards = cardsRef.current;
 
-    if (!section || !cardsContainer || cards.length === 0) return;
+    if (!section || !cardsContainer || cards.length === 0 || isMobile) return;
 
     // Set initial state - all cards below viewport except first
     cards.forEach((card, index) => {
@@ -104,14 +106,17 @@ const FeatureShowcase = () => {
       triggers.forEach((trigger) => trigger.kill());
       pinTrigger.kill();
     };
-  }, []);
+  }, [isMobile]);
 
   return (
-    <section ref={sectionRef} className=" min-h-screen relative">
+    <section
+      ref={sectionRef}
+      className={isMobile ? "relative" : "min-h-screen relative"}
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-12">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight max-w-">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-satoshi leading-tight font-bold">
             Everything you need to build your AI workforce
           </h2>
           <p className="text-gray-600 text-base md:text-lg max-w-sm lg:pt-4">
@@ -123,7 +128,9 @@ const FeatureShowcase = () => {
         {/* Stacked Cards Container */}
         <div
           ref={cardsContainerRef}
-          className="relative h-[500px] md:h-[550px]"
+          className={
+            isMobile ? "flex flex-col gap-6" : "relative h-[500px] md:h-[550px]"
+          }
         >
           {featureCards.map((card, index) => (
             <div
@@ -131,8 +138,8 @@ const FeatureShowcase = () => {
               ref={(el) => {
                 if (el) cardsRef.current[index] = el;
               }}
-              className="absolute inset-0 w-full"
-              style={{ zIndex: index + 1 }}
+              className={isMobile ? "w-full" : "absolute inset-0 w-full"}
+              style={isMobile ? {} : { zIndex: index + 1 }}
             >
               <FeatureCard
                 title={card.title}
@@ -192,7 +199,7 @@ const FeatureCard = ({ title, description, image }: FeatureCardProps) => {
             </svg>
           </div>
 
-          <h3 className="text-2xl md:text-3xl lg:text-[2.5rem] font-serif leading-tight mb-5 relative z-10">
+          <h3 className="text-2xl md:text-3xl lg:text-[2.5rem] font-satoshi font-semibold leading-tight mb-5 relative z-10">
             {title}
           </h3>
           <p className="text-gray-600 text-base md:text-lg leading-relaxed relative z-10 max-w-md">
