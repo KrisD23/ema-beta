@@ -78,7 +78,7 @@ const SolutionCards = () => {
     if (!section || !cardsContainer) return;
 
     const totalScrollWidth = cardsContainer.scrollWidth - window.innerWidth;
-    const extraPinSpace = 300; // Extra space to hold the last cards before unpinning
+    const extraPinSpace = window.innerWidth; // Full viewport width of extra scroll
 
     const ctx = gsap.context(() => {
       gsap.to(cardsContainer, {
@@ -163,6 +163,8 @@ const SolutionCards = () => {
                 </div>
               </div>
             ))}
+            {/* Extra spacing div at the end */}
+            <div className="shrink-0 w-[50vw]"></div>
           </div>
         </div>
       </div>
