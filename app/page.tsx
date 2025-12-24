@@ -1,4 +1,3 @@
-import CompetitiveAdvantage from "@/components/Insights-page/CompetitiveAdvantage";
 import Cta from "@/components/Insights-page/Cta";
 import FeatureShowcase from "@/components/Insights-page/FeatureShowcase";
 import GoBeyondSection from "@/components/Insights-page/GoBeyondSection";
@@ -10,7 +9,6 @@ const Home = () => {
     <main>
       <Hero />
       <GoBeyondSection />
-      <CompetitiveAdvantage />
       <SolutionCards />
       <FeatureShowcase />
       <Cta />
