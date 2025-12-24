@@ -144,9 +144,6 @@ const FeatureShowcase = () => {
           ))}
         </div>
       </div>
-
-      {/* Decorative gradient overlay at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#F5F3EE] to-transparent pointer-events-none" />
     </section>
   );
 };
@@ -161,7 +158,7 @@ interface FeatureCardProps {
 
 const FeatureCard = ({ title, description, image }: FeatureCardProps) => {
   return (
-    <div className="bg-[#EDEAE3] rounded-3xl p-8 md:p-12 lg:p-14 h-full shadow-lg overflow-hidden">
+    <div className="bg-white rounded-3xl p-8 md:p-12 lg:p-14 h-full shadow-lg overflow-hidden">
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12 h-full">
         {/* Left Content */}
         <div className="lg:w-2/5 relative">
