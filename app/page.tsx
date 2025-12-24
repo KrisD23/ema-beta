@@ -1,7 +1,9 @@
+import Hero from "@/components/Insights-page/Hero";
+
 const Home = () => {
   return (
     <main>
-      <p className="text-primary-green">Test</p>
+      <Hero />
     </main>
   );
 };
