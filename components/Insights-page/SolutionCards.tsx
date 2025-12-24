@@ -120,10 +120,10 @@ const SolutionCards = () => {
             {cards.map((card) => (
               <div
                 key={card.id}
-                className="flex-shrink-0 w-[300px] md:w-[340px] bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+                className="shrink-0 w-75 md:w-85 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
               >
                 {/* Card Image Placeholder */}
-                <div className="relative h-[280px] md:h-[320px] bg-gray-50 flex items-center justify-center overflow-hidden">
+                <div className="relative h-70 md:h-80 bg-gray-50 flex items-center justify-center overflow-hidden">
                   <Image
                     src={card.image}
                     alt={card.title}
