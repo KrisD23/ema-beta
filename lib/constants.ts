@@ -54,3 +54,34 @@ export const SOCIAL_LINKS: SocialLink[] = [
   { name: "LinkedIn", url: "https://linkedin.com", icon: "linkedin" },
   { name: "Twitter", url: "https://twitter.com", icon: "twitter" },
 ];
+
+export const content = [
+  {
+    step: "01",
+    title: "One-stop search and analysis",
+    desc: "Bring together documents, files, apps, and data—no more endless hunting in siloed systems.",
+    bg: "bg-[#E6E3D5]",
+    text: "text-gray-900",
+  },
+  {
+    step: "02",
+    title: "Agentic intelligence",
+    desc: "Ema doesn’t just “find” information; it can take multiple steps, query databases, write code, and automate follow-ups.",
+    bg: "bg-[#202F3C]",
+    text: "text-white",
+  },
+  {
+    step: "03",
+    title: "Contextual answers, zero guesswork",
+    desc: "Every response is cited at the paragraph level, with built-in charts, code snippets, and more.",
+    bg: "bg-[#A5CFB4]",
+    text: "text-gray-900",
+  },
+  {
+    step: "04",
+    title: "Self-updating knowledge",
+    desc: "Connect new data automatically—Ema keeps learning from your latest tools, files, and repositories.",
+    bg: "bg-[#1F8844]",
+    text: "text-white",
+  },
+];

@@ -9,41 +9,11 @@ import anim1 from "@/public/animations/Knowledge_Insight_scroll_animation/KI_scr
 import anim2 from "@/public/animations/Knowledge_Insight_scroll_animation/KI_scroll2_sq.json";
 import anim3 from "@/public/animations/Knowledge_Insight_scroll_animation/KI_scroll3_sq.json";
 import anim4 from "@/public/animations/Knowledge_Insight_scroll_animation/KI_scroll4_sq.json";
+import { content } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const animations = [anim1, anim2, anim3, anim4];
-
-const content = [
-  {
-    step: "01",
-    title: "One-stop search and analysis",
-    desc: "Bring together documents, files, apps, and data—no more endless hunting in siloed systems.",
-    bg: "bg-[#E6E3D5]",
-    text: "text-gray-900",
-  },
-  {
-    step: "02",
-    title: "Agentic intelligence",
-    desc: "Ema doesn’t just “find” information; it can take multiple steps, query databases, write code, and automate follow-ups.",
-    bg: "bg-[#202F3C]",
-    text: "text-white",
-  },
-  {
-    step: "03",
-    title: "Contextual answers, zero guesswork",
-    desc: "Every response is cited at the paragraph level, with built-in charts, code snippets, and more.",
-    bg: "bg-[#A5CFB4]",
-    text: "text-gray-900",
-  },
-  {
-    step: "04",
-    title: "Self-updating knowledge",
-    desc: "Connect new data automatically—Ema keeps learning from your latest tools, files, and repositories.",
-    bg: "bg-[#1F8844]",
-    text: "text-white",
-  },
-];
 
 const WhatSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
