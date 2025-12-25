@@ -7,64 +7,16 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const cards = [
-  {
-    id: 1,
-    image: "/solution-cards/card1.png",
-    title: "Employee Assistant",
-    description:
-      "Streamline daily inquiries with instant answers on policies, procedures, and shared documents. No more pinging teammates or wading through folders.",
-  },
-  {
-    id: 2,
-    image: "/solution-cards/card2.png",
-    title: "Sales Assistant",
-    description:
-      "Quickly access account status, pipeline updates, and CRM insights. Focus on closing deals while Ema handles research and repetitive tasks.",
-  },
-  {
-    id: 3,
-    image: "/solution-cards/card3.png",
-    title: "Marketing Assistant",
-    description:
-      "Find campaign assets, performance metrics, and brand guidelines in seconds. Optimize strategy with real-time, data-driven suggestions.",
-  },
-  {
-    id: 4,
-    image: "/solution-cards/card4.png",
-    title: "Technical Assistant",
-    description:
-      "Retrieve code snippets, engineering docs, or product specs on demand. Spend less time searching and more time building.",
-  },
-  {
-    id: 5,
-    image: "/solution-cards/card5.png",
-    title: "Leadership Assistant",
-    description:
-      "Gain unified insights across departments to make data-backed decisions fast. Get top-level metrics and reports in one conversation.",
-  },
-  {
-    id: 6,
-    image: "/solution-cards/card6.png",
-    title: "Legal & Compliance Assistant",
-    description:
-      "Surface regulations, contracts, and guidelines instantly. Stay on top of evolving compliance requirements without the manual chase.",
-  },
-  {
-    id: 7,
-    image: "/solution-cards/card7.png",
-    title: "Support Data Analyst",
-    description:
-      "Consolidate ticket logs, track resolution metrics, and highlight improvement areas. Drive upsells and implement changes rooted in data, provide proactive, data-driven support.",
-  },
-  {
-    id: 8,
-    image: "/solution-cards/card8.png",
-    title: "Voice of Customer Analyst",
-    description:
-      "Synthesize calls, chats, and social media feedback. Spot key trends, inform product roadmaps, and strengthen customer relationships.",
-  },
-];
+interface Card {
+  id: number | string;
+  image: string;
+  title: string;
+  description: string;
+}
+
+interface SolutionCardsProps {
+  cards: Card[];
+}
 
 const MOBILE_BREAKPOINT = 768;
 
@@ -85,7 +37,7 @@ function useIsMobile() {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
-const SolutionCards = () => {
+const SolutionCards = ({ cards }: SolutionCardsProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
