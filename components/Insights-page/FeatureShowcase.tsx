@@ -157,7 +157,7 @@ const FeatureShowcase = () => {
         {/* Desktop: Animated Stacked Cards Container */}
         <div
           ref={cardsContainerRef}
-          className="hidden md:block relative h-[500px] md:h-[550px]"
+          className="hidden md:block relative h-125 md:h-137.5"
         >
           {featureCards.map((card, index) => (
             <div
