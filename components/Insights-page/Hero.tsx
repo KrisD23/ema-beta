@@ -6,7 +6,7 @@ const Hero = async () => {
   return (
     <section
       id="hero"
-      className="sm:min-h-[120vh] max-w-7xl mx-auto px-6 pb-10 sm:pb-0 pt-28 relative overflow-hidden"
+      className="sm:min-h-[130vh] 2xl:min-h-[120vh] max-w-7xl mx-auto px-6 pb-10 sm:pb-0 pt-28 relative overflow-hidden"
     >
       {/* Foreground Content */}
       <div className="relative z-10 max-w-xl">

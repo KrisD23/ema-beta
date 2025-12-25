@@ -92,7 +92,7 @@ const WhatSection = () => {
 
       <div ref={sectionRef} className="pt-10 sm:pt-32 z-10">
         {/* Scroll Feature Section */}
-        <div className="relative max-w-6xl h-[70vh] sm:h-[55vh] mx-auto overflow-hidden mt-20 px-6 sm:px-0">
+        <div className="relative max-w-6xl h-[85vh] sm:h-[55vh] mx-auto overflow-hidden mt-20 px-6 sm:px-0">
           {/* FLEX CONTAINER */}
           <div className="relative z-10 h-full flex flex-col sm:flex-row">
             {content.map((item, i) => {
@@ -154,9 +154,9 @@ const WhatSection = () => {
                     <p className="text-xl mb-3 opacity-80">{item.step}</p>
                     {/* LOTTIE */}
                     <div
-                      className={`absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-full items-center justify-center transition-all duration-700 ${
+                      className={`absolute top-0 left-1/3 -translate-x-1/2 w-[70%] h-full items-center justify-center transition-all duration-700 ${
                         isActive
-                          ? "opacity-100 scale-85"
+                          ? "opacity-100 scale-75"
                           : "opacity-0 scale-50 pointer-events-none"
                       }`}
                     >
