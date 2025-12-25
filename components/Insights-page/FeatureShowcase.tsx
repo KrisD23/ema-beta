@@ -5,6 +5,17 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+interface Card {
+  id: number | string;
+  image: string;
+  title: string;
+  description: string;
+}
+
+interface featureCardsProps {
+  featureCards: Card[];
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
 const MOBILE_BREAKPOINT = 768;
@@ -26,46 +37,7 @@ function useIsMobile() {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
-// Feature cards data
-const featureCards = [
-  {
-    id: 1,
-    title: "Get breakthrough autonomy",
-    description:
-      "Conversationally build AI Employees to run entire workflows agentically—from start to finish—freeing humans to focus on strategy and growth.",
-    image: "/feature-showcase/1.png",
-  },
-  {
-    id: 2,
-    title: "Optimized, transparent, and trustworthy",
-    description:
-      "Ema's AI Employees are powered by EmaFusion™, which combines the outputs of 100+ LLMs so your AI investments are always optimized and future-proof. Get encrypted PII protection and compliance with leading security protocols from day one.",
-    image: "/feature-showcase/2.png",
-  },
-  {
-    id: 3,
-    title: "Autonomy with judgement",
-    description:
-      "Ema's AI employees reason and learn when to involve humans, so automation stays fast and accurate, but also trusted.",
-    image: "/feature-showcase/3.png",
-  },
-  {
-    id: 4,
-    title: "Grow exponentially in weeks or months—not decades",
-    description:
-      "Ema helped companies like Chegg scale from 1,000 tickets a day to 10,000—not in 6 employees or decades, but weeks or 2 teammates.",
-    image: "/feature-showcase/4.png",
-  },
-  {
-    id: 5,
-    title: "The future of work—made simple",
-    description:
-      "Your digital workforce is just like your human workforce. Create it naturally. Or deploy from our collection of pre-built solutions.",
-    image: "/feature-showcase/5.png",
-  },
-];
-
-const FeatureShowcase = () => {
+const FeatureShowcase = ({ featureCards }: featureCardsProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
