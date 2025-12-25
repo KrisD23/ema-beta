@@ -97,7 +97,7 @@ const FeatureShowcase = () => {
         trigger: section,
         start: () => `top+=${index * window.innerHeight * 0.5} top`,
         end: () => `top+=${(index + 1) * window.innerHeight * 0.5} top`,
-        scrub: 1,
+        scrub: 2,
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.to(card, {
