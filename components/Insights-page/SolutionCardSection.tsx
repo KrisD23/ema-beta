@@ -8,13 +8,21 @@ interface Card {
   description: string;
 }
 
+interface ImageAsset {
+  fields?: {
+    file?: {
+      url?: string;
+    };
+  };
+}
+
 const SolutionCardSection = async () => {
   const solCards = await getSolutionCards();
 
   const cardsDataNew: Card[] = solCards
     .map((entry) => {
       const image = entry.fields.cardImage;
-      const imageUrl = (image as any)?.fields?.file?.url;
+      const imageUrl = (image as ImageAsset)?.fields?.file?.url;
 
       if (!imageUrl) return null;
 
