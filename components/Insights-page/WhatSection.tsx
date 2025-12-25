@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -9,7 +9,6 @@ import anim1 from "@/public/animations/Knowledge_Insight_scroll_animation/KI_scr
 import anim2 from "@/public/animations/Knowledge_Insight_scroll_animation/KI_scroll2_sq.json";
 import anim3 from "@/public/animations/Knowledge_Insight_scroll_animation/KI_scroll3_sq.json";
 import anim4 from "@/public/animations/Knowledge_Insight_scroll_animation/KI_scroll4_sq.json";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -84,7 +83,7 @@ const WhatSection = () => {
     <section className="w-full relative">
       {/* Heading */}
       <div className="max-w-6xl mx-auto pt-20 sm:pt-32 px-6">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-gray-900 leading-tight">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium font-satoshi  leading-tight">
           Go beyond enterprise <br />
           search perform action <br />
           at scale
@@ -102,7 +101,7 @@ const WhatSection = () => {
               return (
                 <div
                   key={i}
-                  className={`relative h-full transition-all duration-700 ease-out overflow-hidden flex-shrink-0 ${item.text} ${item.bg}`}
+                  className={`relative h-full transition-all duration-700 ease-out overflow-hidden shrink-0 ${item.text} ${item.bg}`}
                   style={
                     isMobile
                       ? { height: isActive ? "70%" : "10%" }
@@ -113,10 +112,12 @@ const WhatSection = () => {
                   <div className="h-full hidden sm:flex flex-col justify-between px-8 py-6 ">
                     {/* Text */}
                     <div>
-                      <p className="text-xl mb-3 opacity-80">{item.step}</p>
+                      <p className="text-xl mb-3 opacity-80 font-satoshi">
+                        {item.step}
+                      </p>
 
                       <h3
-                        className={`text-2xl md:text-3xl font-normal mb-6 max-w-xs ${
+                        className={`text-2xl md:text-3xl font-medium font-satoshi mb-6 max-w-xs ${
                           isActive ? "" : "hidden"
                         }`}
                       >
@@ -145,7 +146,7 @@ const WhatSection = () => {
                       animationData={animations[i]}
                       autoplay
                       loop
-                      className="w-[360px]"
+                      className="w-90"
                     />
                   </div>
 
@@ -160,11 +161,11 @@ const WhatSection = () => {
                       }`}
                     >
                       <Lottie
-                        key={i} // 🔥 ensures correct instance per card
+                        key={i} // ensures correct instance per card
                         animationData={animations[i]}
                         autoplay
                         loop
-                        className="w-[360px]"
+                        className="w-90"
                       />
                     </div>
                     <div className="z-10">
