@@ -5,7 +5,7 @@ import Image from "next/image";
 import { NAVLINKS } from "@/lib/constants";
 
 const Navbar = () => {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [, setOpenDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -101,7 +101,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+          mobileMenuOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-6 py-4 bg-white border-t border-gray-100">
