@@ -12,7 +12,7 @@ const GoBeyondSection = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Left Content */}
           <div className="lg:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-satoshi font-medium   leading-tight mb-6">
+            <h2 className="text-4xl md:text-5xl font-satoshi font-medium leading-tight mb-6">
               Go Beyond
               <br />
               Typical Search
@@ -46,7 +46,7 @@ const GoBeyondSection = () => {
                 onClick={() => setActiveTab("after")}
                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeTab === "after"
-                    ? "bg-[#2d5a47] text-white"
+                    ? "bg-primary-green text-white"
                     : " hover:bg-gray-100"
                 }`}
               >

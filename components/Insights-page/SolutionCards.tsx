@@ -145,7 +145,7 @@ const SolutionCards = () => {
   const hasMoreCards = visibleCards < cards.length;
 
   return (
-    <section ref={sectionRef} className="overflow-hidden bg-[#f5f5f0]">
+    <section ref={sectionRef} className="overflow-hidden">
       <div ref={triggerRef} className="md:min-h-screen">
         {/* Header */}
         <div className="max-w-7xl mx-auto pt-16 md:pt-24 px-6 md:px-12 mb-12">
@@ -179,29 +179,12 @@ const SolutionCards = () => {
                       target.style.display = "none";
                     }}
                   />
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-300 z-0">
-                    <svg
-                      className="w-20 h-20"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2-2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold font-satoshi mb-3">
                     {card.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {card.description}
-                  </p>
+                  <p className="text-sm leading-relaxed">{card.description}</p>
                 </div>
               </div>
             ))}
@@ -212,7 +195,7 @@ const SolutionCards = () => {
             <div className="md:hidden flex justify-center pb-12">
               <button
                 onClick={handleViewMore}
-                className="px-8 py-3 bg-primary-green text-white font-satoshi font-medium rounded-full hover:bg-opacity-90 transition-all"
+                className="text-primary-green font-satoshi font-medium"
               >
                 VIEW MORE
               </button>

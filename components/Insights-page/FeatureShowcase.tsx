@@ -131,10 +131,10 @@ const FeatureShowcase = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-12">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-satoshi leading-tight font-bold">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-satoshi leading-tight font-bold lg:max-w-2xl">
             Everything you need to build your AI workforce
           </h2>
-          <p className="text-gray-600 text-base md:text-lg max-w-sm lg:pt-4">
+          <p className="text-gray-600 text-base md:text-lg max-w-sm lg:self-end lg:text-left">
             From conversational AI Employee creation to enterprise-grade
             security—Ema handles the complexity so you can focus on results.
           </p>
@@ -193,39 +193,9 @@ interface FeatureCardProps {
 const FeatureCard = ({ title, description, image }: FeatureCardProps) => {
   return (
     <div className="bg-white rounded-3xl p-8 md:p-12 lg:p-14 h-full shadow-lg overflow-hidden">
-      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12 h-full">
+      <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12 h-full">
         {/* Left Content */}
         <div className="lg:w-2/5 relative">
-          {/* Decorative curved lines */}
-          <div className="absolute -left-4 bottom-0 opacity-20 pointer-events-none">
-            <svg
-              width="280"
-              height="280"
-              viewBox="0 0 280 280"
-              fill="none"
-              className="text-[#B5B2A8]"
-            >
-              <path
-                d="M20 260 Q 140 260 140 140 Q 140 20 260 20"
-                stroke="currentColor"
-                strokeWidth="1"
-                fill="none"
-              />
-              <path
-                d="M50 260 Q 155 260 155 155 Q 155 50 260 50"
-                stroke="currentColor"
-                strokeWidth="1"
-                fill="none"
-              />
-              <path
-                d="M80 260 Q 170 260 170 170 Q 170 80 260 80"
-                stroke="currentColor"
-                strokeWidth="1"
-                fill="none"
-              />
-            </svg>
-          </div>
-
           <h3 className="text-2xl md:text-3xl lg:text-[2.5rem] font-satoshi font-semibold leading-tight mb-5 relative z-10">
             {title}
           </h3>
@@ -235,7 +205,7 @@ const FeatureCard = ({ title, description, image }: FeatureCardProps) => {
         </div>
 
         {/* Right Content - Image */}
-        <div className="lg:w-3/5 w-full h-full flex items-center justify-end">
+        <div className="lg:w-3/5 w-full h-full flex items-start justify-end">
           <div className="relative w-full max-w-xl">
             <Image
               src={image}
