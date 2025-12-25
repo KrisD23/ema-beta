@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function LottieAnimation({
-  loop = true,
+  loop = false,
   autoplay = true,
   className = "",
 }: Props) {
