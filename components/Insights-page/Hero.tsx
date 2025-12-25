@@ -1,6 +1,8 @@
+import { getHero } from "@/lib/action";
 import LottieAnimation from "./LottieAnimation";
 
-const Hero = () => {
+const Hero = async () => {
+  const hero = await getHero();
   return (
     <section
       id="hero"
@@ -9,18 +11,15 @@ const Hero = () => {
       {/* Foreground Content */}
       <div className="relative z-10 max-w-xl">
         <p className="text-lg sm:text-xl font-medium font-satoshi text-primary-green mb-4">
-          KNOWLEDGE INSIGHTS
+          {hero.fields.heroBatch?.toString()}
         </p>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-satoshi font-medium leading-tight mb-6">
-          Empower Teams with <br />
-          the Right Knowledge
+          {hero.fields.heading?.toString()}
         </h1>
 
         <p className="text-base sm:text-lg font-satoshi font-normal max-w-62.5 sm:max-w-sm leading-relaxed">
-          Unify all your enterprise knowledge into a single source of truth, so
-          you can ask questions, surface insights, and take action — right when
-          you need it.
+          {hero.fields.description?.toString()}
         </p>
       </div>
 
