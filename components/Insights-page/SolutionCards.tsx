@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useSyncExternalStore } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -18,32 +18,20 @@ interface SolutionCardsProps {
   cards: Card[];
 }
 
-const MOBILE_BREAKPOINT = 768;
-
-// Custom hook to detect mobile using useSyncExternalStore (hydration-safe)
-function useIsMobile() {
-  const subscribe = (callback: () => void) => {
-    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
-    mediaQuery.addEventListener("change", callback);
-    return () => mediaQuery.removeEventListener("change", callback);
-  };
-
-  const getSnapshot = () => {
-    return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
-  };
-
-  const getServerSnapshot = () => false; // Default to desktop on server
-
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-}
-
 const SolutionCards = ({ cards }: SolutionCardsProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const [visibleCards, setVisibleCards] = useState(3);
-  const isMobile = useIsMobile();
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640); // sm breakpoint
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;

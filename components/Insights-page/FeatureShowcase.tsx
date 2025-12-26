@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,30 +18,19 @@ interface featureCardsProps {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MOBILE_BREAKPOINT = 768;
-
-// Custom hook to detect mobile using useSyncExternalStore (hydration-safe)
-function useIsMobile() {
-  const subscribe = (callback: () => void) => {
-    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
-    mediaQuery.addEventListener("change", callback);
-    return () => mediaQuery.removeEventListener("change", callback);
-  };
-
-  const getSnapshot = () => {
-    return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
-  };
-
-  const getServerSnapshot = () => false; // Default to desktop on server
-
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-}
-
 const FeatureShowcase = ({ featureCards }: featureCardsProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
-  const isMobile = useIsMobile();
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640); // sm breakpoint
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -96,7 +85,7 @@ const FeatureShowcase = ({ featureCards }: featureCardsProps) => {
       triggers.forEach((trigger) => trigger.kill());
       pinTrigger.kill();
     };
-  }, [isMobile]);
+  }, [featureCards.length, isMobile]);
 
   return (
     <section ref={sectionRef} className="min-h-screen md:min-h-screen relative">
