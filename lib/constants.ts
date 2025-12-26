@@ -85,3 +85,26 @@ export const content = [
     text: "text-white",
   },
 ];
+
+export const faqData = [
+  {
+    question: "How can AI be used for customer support?",
+    answer:
+      "AI can be used for customer support through chatbots, virtual assistants, automated ticket routing, sentiment analysis, and providing instant responses to common queries 24/7.",
+  },
+  {
+    question: "What is generative AI for customer support?",
+    answer:
+      "Generative AI for customer support uses large language models to understand context, generate human-like responses, create personalized solutions, and handle complex customer inquiries autonomously.",
+  },
+  {
+    question: "Can AI replace customer support?",
+    answer:
+      "AI can augment and enhance customer support by handling routine queries, but human agents remain essential for complex issues, emotional support, and building genuine customer relationships.",
+  },
+  {
+    question: "What does the future of AI in customer support look like?",
+    answer:
+      "The future includes more sophisticated AI assistants, seamless omnichannel experiences, predictive support, and AI-human collaboration that delivers faster, more personalized customer service.",
+  },
+];
