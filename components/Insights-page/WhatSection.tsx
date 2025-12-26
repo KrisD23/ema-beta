@@ -29,6 +29,9 @@ const WhatSection = () => {
   }, []);
 
   useEffect(() => {
+    // Only apply scroll-based animation on desktop
+    if (isMobile) return;
+
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
@@ -47,7 +50,14 @@ const WhatSection = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
+
+  // Handle tap on mobile
+  const handleCardTap = (index: number) => {
+    if (isMobile) {
+      setActive(index);
+    }
+  };
 
   return (
     <section className="w-full relative">
@@ -60,7 +70,10 @@ const WhatSection = () => {
         </h2>
       </div>
 
-      <div ref={sectionRef} className="pt-10 sm:pt-32 z-10">
+      <div
+        ref={sectionRef}
+        className={`pt-10 sm:pt-32 z-10 ${isMobile ? "" : ""}`}
+      >
         {/* Scroll Feature Section */}
         <div className="relative max-w-6xl h-[85vh] sm:h-[55vh] mx-auto overflow-hidden mt-20 px-6 sm:px-0">
           {/* FLEX CONTAINER */}
@@ -71,7 +84,10 @@ const WhatSection = () => {
               return (
                 <div
                   key={i}
-                  className={`relative h-full transition-all duration-700 ease-out overflow-hidden shrink-0 ${item.text} ${item.bg}`}
+                  onClick={() => handleCardTap(i)}
+                  className={`relative h-full transition-all duration-700 ease-out overflow-hidden shrink-0 ${
+                    item.text
+                  } ${item.bg} ${isMobile ? "cursor-pointer" : ""}`}
                   style={
                     isMobile
                       ? { height: isActive ? "70%" : "10%" }
